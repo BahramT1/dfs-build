@@ -14,6 +14,25 @@ public class Build {
    * @param k the maximum word length (exclusive)
    */
   public static void printShortWords(Vertex<String> vertex, int k) {
+    Set<Vertex<String>> visited = new HashSet<>();
+    printShortWordsHelper(vertex, k, visited);
+  }
+
+  public static void printShortWordsHelper(Vertex<String> vertex, int k, Set<Vertex<String>> visited){
+    if(vertex == null ) return;
+    if(visited.contains(vertex)) return;
+    visited.add(vertex);
+
+    if (vertex.data.length() < k) {
+      System.out.println(vertex.data);
+  }
+
+    if(vertex.neighbors != null){
+      for(var neighbor : vertex.neighbors){
+        printShortWordsHelper(neighbor, k, visited);
+      }
+    }
+
   }
 
   /**
